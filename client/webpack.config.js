@@ -23,11 +23,15 @@ module.exports = () => {
         template: './index.html',
         title: 'Text Editor',
       }),
+      new MiniCssExtractPlugin(),
     ],
 
     module: {
       rules: [
-        
+        {
+          test: /\.css$/i,
+          use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        },
       ],
     },
   };
