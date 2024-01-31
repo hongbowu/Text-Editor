@@ -28,6 +28,10 @@ module.exports = () => {
         clientsClaim: true,
         skipWaiting: true,
       }),
+      new InjectManifest({
+        swSrc: './src-sw.js',
+        swDest: 'service-worker.js',
+      }), 
     ],
 
     module: {
