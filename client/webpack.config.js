@@ -24,6 +24,10 @@ module.exports = () => {
         title: 'Text Editor',
       }),
       new MiniCssExtractPlugin(),
+      new WorkboxPlugin.GenerateSW({
+        clientsClaim: true,
+        skipWaiting: true,
+      }),
     ],
 
     module: {
