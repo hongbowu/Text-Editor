@@ -32,6 +32,23 @@ module.exports = () => {
         swSrc: './src-sw.js',
         swDest: 'service-worker.js',
       }), 
+      new WebpackPwaManifest({
+        name: 'Text Editor',
+        short_name: 'TextEditor',
+        orientation: "portrait",
+        display: "standalone",
+        start_url: "./",
+        publicPath: "./",
+        description: 'Keep track of important tasks!',
+        background_color: '#7eb4e2',
+        fingerprints: false,
+        icons: [
+      {
+        src: path.resolve('./src/images/logo.png'),
+        sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
+      },]
+      }),
+     
     ],
 
     module: {
