@@ -24,10 +24,6 @@ module.exports = () => {
         title: 'Text Editor',
       }),
       new MiniCssExtractPlugin(),
-      new WorkboxPlugin.GenerateSW({
-        clientsClaim: true,
-        skipWaiting: true,
-      }),
       new InjectManifest({
         swSrc: './src-sw.js',
         swDest: 'service-worker.js',
@@ -56,6 +52,10 @@ module.exports = () => {
         {
           test: /\.css$/i,
           use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        },
+        {
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          type: 'asset/resource',
         },
         {
           test: /\.m?js$/,
