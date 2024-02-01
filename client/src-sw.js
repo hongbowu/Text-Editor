@@ -30,8 +30,8 @@ registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 registerRoute(
   ({ request }) =>
     request.destination === 'style' ||
-    request.destination === 'script' ||
-    request.destination === 'image',
+    request.destination === 'script' ,// ||
+    // request.destination === 'image',
   new CacheFirst({
     cacheName: 'assets-cache',
     plugins: [
@@ -39,7 +39,7 @@ registerRoute(
         statuses: [0, 200],
       }),
       new ExpirationPlugin({
-        maxAgeSeconds: 7 * 24 * 60 * 60, // Adjust the max age as needed
+        maxAgeSeconds: 30 * 24 * 60 * 60, // Adjust the max age as needed
       }),
     ],
   })
