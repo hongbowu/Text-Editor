@@ -1,6 +1,6 @@
 import { openDB } from 'idb';
 
-const initdb = async () =>
+const initDb = async () =>
   openDB('jate', 1, {
     upgrade(db) {
       if (db.objectStoreNames.contains('jate')) {
@@ -14,30 +14,33 @@ const initdb = async () =>
 
 // TODO: Add logic to a method that accepts some content and adds it to the database
 export const putDb = async (content) => {
-  if(err){
-    console.error('putDb not implemented');
+  try {
+    const db = await openDB('jate', 1);
+    const tx = db.transaction('jate', 'readwrite');
+    const store = tx.objectStore('jate');
+    const request = store.add(content);
+    const result = await request;
+    console.log('Data saved to the database', result);//get some feedback
+  } catch (error) {
+    console.error('Error saving data to the database: ', error);
   }
-  const db = await openDB('jate', 1);
-  const tx = db.transaction('jate', 'readwrite');
-  const store = tx.objectStore('jate');
-  const request = store.add(content);
-  const result = await request;
-  console.log('Data saved to the database', result);//get some feedback
 }
 
 
 // TODO: Add logic for a method that gets all the content from the database
 export const getDb = async () => {
-  if(err){
-    console.error('getDb not implemented');
+  try {
+    const db = await openDB('jate', 1);
+    const tx = db.transaction('jate', 'readonly');
+    const store = tx.objectStore('jate');
+    const request = store.getAll();
+    const result = await request;
+    console.log('All content:', result);//get some feedback
+    return result;
+  } catch (error) {
+    console.error('Error retrieving data from the database: ', error);
   }
-  const db = await openDB('jate', 1);
-  const tx = db.transaction('jate', 'readonly');
-  const store = tx.objectStore('jate');
-  const request = store.getAll();
-  const result = await request;
-  console.log('All content:', result);//get some feedback
-  return result;
+  
 }
 
-initdb();
+initDb();
